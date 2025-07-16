@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps Learning Schedule</title>
+    <title>Optimized DevOps Learning Schedule</title>
     <style>
         * {
             margin: 0;
@@ -47,6 +47,85 @@
         .header p {
             font-size: 1.2rem;
             opacity: 0.9;
+        }
+
+        .learning-path {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .learning-path h2 {
+            color: #3b82f6;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .path-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .path-step {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            min-width: 150px;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .path-step:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .path-step::after {
+            content: '→';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #3b82f6;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .path-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            background: #3b82f6;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-time {
+            font-size: 0.8rem;
+            color: #94a3b8;
         }
 
         .schedule-grid {
@@ -107,6 +186,15 @@
             transform: translateX(5px);
         }
 
+        .time-slot.learning {
+            border-left-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .time-slot.learning:hover {
+            background: rgba(245, 158, 11, 0.2);
+        }
+
         .time {
             font-weight: 600;
             color: #60a5fa;
@@ -118,6 +206,10 @@
             color: #e2e8f0;
         }
 
+        .activity.learning {
+            color: #fbbf24;
+        }
+
         .duration {
             background: linear-gradient(45deg, #3b82f6, #8b5cf6);
             color: white;
@@ -125,56 +217,6 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
-        }
-
-        .topics-section {
-            margin-bottom: 3rem;
-        }
-
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .topic-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-            border-radius: 16px;
-            padding: 1.5rem;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .topic-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2);
-        }
-
-        .topic-card h4 {
-            color: #60a5fa;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .topic-card ul {
-            list-style: none;
-        }
-
-        .topic-card li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
-            color: #cbd5e1;
-        }
-
-        .topic-card li:last-child {
-            border-bottom: none;
-        }
-
-        .topic-card li::before {
-            content: '▸';
-            color: #3b82f6;
-            margin-right: 0.5rem;
         }
 
         .stats-section {
@@ -213,80 +255,89 @@
             letter-spacing: 0.5px;
         }
 
-        .tips-section {
+        .rationale-section {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
             border-radius: 16px;
             padding: 2rem;
+            margin-bottom: 3rem;
             border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .tip-card {
-            background: rgba(15, 23, 42, 0.4);
-            border-radius: 12px;
-            padding: 1.5rem;
-            border-left: 4px solid #8b5cf6;
-            transition: all 0.3s ease;
-        }
-
-        .tip-card:hover {
-            transform: translateX(5px);
-            background: rgba(139, 92, 246, 0.1);
-        }
-
-        .tip-card h4 {
-            color: #a855f7;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .tip-card p {
-            color: #cbd5e1;
-            font-size: 0.9rem;
-        }
-
-        .checklist {
-            background: rgba(30, 41, 59, 0.6);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-top: 3rem;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        .checklist h3 {
-            color: #22c55e;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .checklist-grid {
+        .rationale-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
+        .rationale-card {
             background: rgba(15, 23, 42, 0.4);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid #8b5cf6;
         }
 
-        .checklist-item:hover {
-            background: rgba(34, 197, 94, 0.1);
+        .rationale-card h4 {
+            color: #a855f7;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
 
-        .checklist-item input {
-            margin-right: 1rem;
-            transform: scale(1.2);
+        .rationale-card p {
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+        }
+
+        .weekly-plan {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .weekly-plan h3 {
+            color: #22c55e;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .week-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid #22c55e;
+        }
+
+        .week-card h4 {
+            color: #34d399;
+            margin-bottom: 1rem;
+        }
+
+        .week-card ul {
+            list-style: none;
+            color: #cbd5e1;
+        }
+
+        .week-card li {
+            padding: 0.25rem 0;
+            border-bottom: 1px solid rgba(34, 197, 94, 0.1);
+        }
+
+        .week-card li:last-child {
+            border-bottom: none;
+        }
+
+        .week-card li::before {
+            content: '✓';
+            color: #22c55e;
+            margin-right: 0.5rem;
         }
 
         .footer {
@@ -310,6 +361,14 @@
                 grid-template-columns: 1fr;
             }
 
+            .path-flow {
+                flex-direction: column;
+            }
+
+            .path-step::after {
+                display: none;
+            }
+
             .time-slot {
                 flex-direction: column;
                 text-align: center;
@@ -321,15 +380,51 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>DevOps Learning Schedule</h1>
-            <p>Master DevOps with 40 minutes daily practice per topic</p>
+            <h1>🚀 Optimized DevOps Learning Schedule</h1>
+            <p>Strategic learning path with 4 hours daily practice - Building foundation to advanced skills</p>
+        </div>
+
+        <div class="learning-path">
+            <h2>📈 Learning Progression Flow</h2>
+            <div class="path-flow">
+                <div class="path-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">🐧 Linux</div>
+                    <div class="step-time">Foundation</div>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">📜 Bash</div>
+                    <div class="step-time">Automation</div>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">🐍 Python</div>
+                    <div class="step-time">Programming</div>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">🌐 Networking</div>
+                    <div class="step-time">Infrastructure</div>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">5</div>
+                    <div class="step-title">🐳 Docker</div>
+                    <div class="step-time">Containers</div>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">6</div>
+                    <div class="step-title">☸️ Kubernetes</div>
+                    <div class="step-time">Orchestration</div>
+                </div>
+            </div>
         </div>
 
         <div class="stats-section">
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number">6</div>
-                    <div class="stat-label">Technologies</div>
+                    <div class="stat-label">Core Technologies</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">40</div>
@@ -348,15 +443,15 @@
 
         <div class="schedule-grid">
             <div class="schedule-card">
-                <h3>🌅 Morning Routine</h3>
+                <h3>🌅 Morning Foundation (6:00 - 8:00 AM)</h3>
                 <div class="time-slot">
                     <span class="time">6:00 - 6:30 AM</span>
-                    <span class="activity">Wake up, brush teeth, freshen up</span>
+                    <span class="activity">Wake up, freshen up</span>
                     <span class="duration">30 min</span>
                 </div>
-                <div class="time-slot">
+                <div class="time-slot learning">
                     <span class="time">6:30 - 7:10 AM</span>
-                    <span class="activity">Linux Practice</span>
+                    <span class="activity learning">🐧 Linux Practice</span>
                     <span class="duration">40 min</span>
                 </div>
                 <div class="time-slot">
@@ -366,21 +461,26 @@
                 </div>
                 <div class="time-slot">
                     <span class="time">7:30 - 8:00 AM</span>
-                    <span class="activity">Travel to office</span>
+                    <span class="activity">Get ready for office</span>
                     <span class="duration">30 min</span>
                 </div>
             </div>
 
             <div class="schedule-card">
-                <h3>💼 Work Hours Learning</h3>
+                <h3>🚗 Office Hours (8:00 AM - 7:00 PM)</h3>
+                <div class="time-slot">
+                    <span class="time">8:00 - 9:00 AM</span>
+                    <span class="activity">Travel to office</span>
+                    <span class="duration">1 hour</span>
+                </div>
                 <div class="time-slot">
                     <span class="time">9:00 - 11:00 AM</span>
                     <span class="activity">Work</span>
                     <span class="duration">2 hours</span>
                 </div>
-                <div class="time-slot">
+                <div class="time-slot learning">
                     <span class="time">11:00 - 11:40 AM</span>
-                    <span class="activity">Python Practice</span>
+                    <span class="activity learning">📜 Bash Scripting</span>
                     <span class="duration">40 min</span>
                 </div>
                 <div class="time-slot">
@@ -398,9 +498,9 @@
                     <span class="activity">Lunch Break</span>
                     <span class="duration">1 hour</span>
                 </div>
-                <div class="time-slot">
+                <div class="time-slot learning">
                     <span class="time">2:00 - 2:40 PM</span>
-                    <span class="activity">Docker Practice</span>
+                    <span class="activity learning">🐍 Python Practice</span>
                     <span class="duration">40 min</span>
                 </div>
                 <div class="time-slot">
@@ -416,7 +516,7 @@
             </div>
 
             <div class="schedule-card">
-                <h3>🌙 Evening Routine</h3>
+                <h3>🌙 Evening Advanced Topics (7:00 PM - 11:00 PM)</h3>
                 <div class="time-slot">
                     <span class="time">7:00 - 8:00 PM</span>
                     <span class="activity">Travel home</span>
@@ -427,223 +527,157 @@
                     <span class="activity">Dinner</span>
                     <span class="duration">30 min</span>
                 </div>
-                <div class="time-slot">
+                <div class="time-slot learning">
                     <span class="time">8:30 - 9:10 PM</span>
-                    <span class="activity">Bash Scripting</span>
+                    <span class="activity learning">🌐 Networking</span>
                     <span class="duration">40 min</span>
                 </div>
-                <div class="time-slot">
+                <div class="time-slot learning">
                     <span class="time">9:10 - 9:50 PM</span>
-                    <span class="activity">Kubernetes</span>
+                    <span class="activity learning">🐳 Docker</span>
                     <span class="duration">40 min</span>
                 </div>
-                <div class="time-slot">
+                <div class="time-slot learning">
                     <span class="time">9:50 - 10:30 PM</span>
-                    <span class="activity">Networking</span>
+                    <span class="activity learning">☸️ Kubernetes</span>
                     <span class="duration">40 min</span>
                 </div>
-                <div class="time-slot">
-                    <span class="time">10:30 - 11:10 PM</span>
-                    <span class="activity">Book Reading</span>
-                    <span class="duration">40 min</span>
+                <div class="time-slot learning">
+                    <span class="time">10:30 - 11:00 PM</span>
+                    <span class="activity learning">📚 Book Reading</span>
+                    <span class="duration">30 min</span>
                 </div>
                 <div class="time-slot">
-                    <span class="time">11:10 PM</span>
+                    <span class="time">11:00 PM</span>
                     <span class="activity">Sleep</span>
-                    <span class="duration">Rest</span>
+                    <span class="duration">7 hours</span>
                 </div>
             </div>
         </div>
 
-        <div class="topics-section">
-            <h2 style="color: #3b82f6; font-size: 2rem; margin-bottom: 2rem; text-align: center;">Learning Topics</h2>
-            <div class="topics-grid">
-                <div class="topic-card">
-                    <h4>🐧 Linux (40 min)</h4>
-                    <ul>
-                        <li>Commands and system administration</li>
-                        <li>File operations and permissions</li>
-                        <li>Process management and monitoring</li>
-                        <li>Package management and services</li>
-                        <li>System configuration and troubleshooting</li>
-                    </ul>
+        <div class="rationale-section">
+            <h2 style="color: #8b5cf6; font-size: 2rem; margin-bottom: 2rem; text-align: center;">🧠 Why This Learning Order?</h2>
+            <div class="rationale-grid">
+                <div class="rationale-card">
+                    <h4>🐧 Linux First (Morning)</h4>
+                    <p><strong>Why:</strong> Foundation for everything else</p>
+                    <p><strong>Benefits:</strong> Commands, file system, processes</p>
+                    <p><strong>Sets up:</strong> Everything builds on Linux knowledge</p>
                 </div>
 
-                <div class="topic-card">
-                    <h4>🐍 Python (40 min)</h4>
-                    <ul>
-                        <li>Programming fundamentals and syntax</li>
-                        <li>Automation scripts and tools</li>
-                        <li>API integration and web scraping</li>
-                        <li>DevOps libraries and frameworks</li>
-                        <li>Error handling and debugging</li>
-                    </ul>
+                <div class="rationale-card">
+                    <h4>📜 Bash Second (11 AM)</h4>
+                    <p><strong>Why:</strong> Automates Linux tasks</p>
+                    <p><strong>Benefits:</strong> Scripting, automation, system tasks</p>
+                    <p><strong>Sets up:</strong> Python and DevOps automation</p>
                 </div>
 
-                <div class="topic-card">
-                    <h4>🐳 Docker (40 min)</h4>
-                    <ul>
-                        <li>Container lifecycle and operations</li>
-                        <li>Dockerfile creation and optimization</li>
-                        <li>Networking and volume management</li>
-                        <li>Multi-container applications</li>
-                        <li>Best practices and troubleshooting</li>
-                    </ul>
+                <div class="rationale-card">
+                    <h4>🐍 Python Third (2 PM)</h4>
+                    <p><strong>Why:</strong> Advanced automation and tools</p>
+                    <p><strong>Benefits:</strong> APIs, complex scripts, DevOps tools</p>
+                    <p><strong>Sets up:</strong> Container and orchestration scripting</p>
                 </div>
 
-                <div class="topic-card">
-                    <h4>📜 Bash Scripting (40 min)</h4>
-                    <ul>
-                        <li>Script writing and automation</li>
-                        <li>Variables and control structures</li>
-                        <li>Functions and parameter handling</li>
-                        <li>Text processing and file operations</li>
-                        <li>System administration automation</li>
-                    </ul>
+                <div class="rationale-card">
+                    <h4>🌐 Networking Fourth (8:30 PM)</h4>
+                    <p><strong>Why:</strong> Essential for containers and clusters</p>
+                    <p><strong>Benefits:</strong> Protocols, routing, security</p>
+                    <p><strong>Sets up:</strong> Docker networking and K8s services</p>
                 </div>
 
-                <div class="topic-card">
-                    <h4>☸️ Kubernetes (40 min)</h4>
-                    <ul>
-                        <li>Pod and container management</li>
-                        <li>Services and ingress configuration</li>
-                        <li>Deployments and scaling</li>
-                        <li>Configuration management</li>
-                        <li>Monitoring and troubleshooting</li>
-                    </ul>
+                <div class="rationale-card">
+                    <h4>🐳 Docker Fifth (9:10 PM)</h4>
+                    <p><strong>Why:</strong> Modern app deployment</p>
+                    <p><strong>Benefits:</strong> Containerization, images, volumes</p>
+                    <p><strong>Sets up:</strong> Kubernetes container orchestration</p>
                 </div>
 
-                <div class="topic-card">
-                    <h4>🌐 Networking (40 min)</h4>
-                    <ul>
-                        <li>Network fundamentals and protocols</li>
-                        <li>DNS, DHCP, and routing</li>
-                        <li>Load balancing and proxies</li>
-                        <li>Security and firewall configuration</li>
-                        <li>Cloud networking and monitoring</li>
-                    </ul>
+                <div class="rationale-card">
+                    <h4>☸️ Kubernetes Last (9:50 PM)</h4>
+                    <p><strong>Why:</strong> Orchestrates everything learned</p>
+                    <p><strong>Benefits:</strong> Scaling, management, production</p>
+                    <p><strong>Uses:</strong> All previous skills combined</p>
                 </div>
             </div>
         </div>
 
-        <div class="tips-section">
-            <h2 style="color: #8b5cf6; font-size: 2rem; margin-bottom: 2rem; text-align: center;">Success Tips</h2>
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <h4>🎯 Consistency</h4>
-                    <p>Stick to the schedule daily. Even 20-30 minutes is better than skipping entirely.</p>
+        <div class="weekly-plan">
+            <h3>📅 Weekly Focus Areas</h3>
+            <div class="week-grid">
+                <div class="week-card">
+                    <h4>Week 1-2: Foundation</h4>
+                    <ul>
+                        <li>Master Linux command line</li>
+                        <li>Basic Bash scripting</li>
+                        <li>Python fundamentals</li>
+                        <li>Networking basics</li>
+                    </ul>
                 </div>
-                <div class="tip-card">
-                    <h4>🛠️ Active Learning</h4>
-                    <p>Always practice hands-on. Don't just read - code, configure, and experiment.</p>
-                </div>
-                <div class="tip-card">
-                    <h4>📝 Documentation</h4>
-                    <p>Keep notes of key concepts, commands, and solutions for future reference.</p>
-                </div>
-                <div class="tip-card">
-                    <h4>🧩 Problem-solving</h4>
-                    <p>Work on real challenges and troubleshoot issues to build practical skills.</p>
-                </div>
-                <div class="tip-card">
-                    <h4>👥 Community</h4>
-                    <p>Join forums, Discord servers, and communities for support and networking.</p>
-                </div>
-                <div class="tip-card">
-                    <h4>💤 Rest</h4>
-                    <p>Maintain 7-8 hours of sleep for optimal learning retention and performance.</p>
-                </div>
-            </div>
-        </div>
 
-        <div class="checklist">
-            <h3>📋 Daily Learning Checklist</h3>
-            <div class="checklist-grid">
-                <div class="checklist-item">
-                    <input type="checkbox" id="linux">
-                    <label for="linux">Linux practice (40 min)</label>
+                <div class="week-card">
+                    <h4>Week 3-4: Automation</h4>
+                    <ul>
+                        <li>Advanced Bash automation</li>
+                        <li>Python scripting for DevOps</li>
+                        <li>Network troubleshooting</li>
+                        <li>Docker basics</li>
+                    </ul>
                 </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="python">
-                    <label for="python">Python coding (40 min)</label>
+
+                <div class="week-card">
+                    <h4>Week 5-6: Containers</h4>
+                    <ul>
+                        <li>Docker containerization</li>
+                        <li>Docker networking</li>
+                        <li>Container orchestration prep</li>
+                        <li>Kubernetes fundamentals</li>
+                    </ul>
                 </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="docker">
-                    <label for="docker">Docker containers (40 min)</label>
+
+                <div class="week-card">
+                    <h4>Week 7-8: Orchestration</h4>
+                    <ul>
+                        <li>Kubernetes deployments</li>
+                        <li>Service management</li>
+                        <li>Monitoring and logging</li>
+                        <li>End-to-end projects</li>
+                    </ul>
                 </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="bash">
-                    <label for="bash">Bash scripting (40 min)</label>
+
+                <div class="week-card">
+                    <h4>Ongoing: Integration</h4>
+                    <ul>
+                        <li>Real-world projects</li>
+                        <li>CI/CD pipelines</li>
+                        <li>Performance optimization</li>
+                        <li>Security best practices</li>
+                    </ul>
                 </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="kubernetes">
-                    <label for="kubernetes">Kubernetes operations (40 min)</label>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="networking">
-                    <label for="networking">Networking concepts (40 min)</label>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="reading">
-                    <label for="reading">Book reading (40 min)</label>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="notes">
-                    <label for="notes">Document learning notes</label>
+
+                <div class="week-card">
+                    <h4>📚 Book Reading Focus</h4>
+                    <ul>
+                        <li>"The DevOps Handbook"</li>
+                        <li>"Kubernetes in Action"</li>
+                        <li>"Docker Deep Dive"</li>
+                        <li>"Site Reliability Engineering"</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <p>🚀 Stay consistent, stay curious, and keep building!</p>
-            <p>Remember: Progress > Perfection</p>
+            <p>🎯 <strong>Key Success Factors:</strong></p>
+            <p>Morning energy for foundations | Work break efficiency | Evening focus for advanced topics</p>
+            <p>Each skill builds upon the previous - perfect learning progression! 🚀</p>
         </div>
     </div>
 
     <script>
-        // Add interactive functionality
+        // Enhanced interactive functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Add smooth scrolling for better UX
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-
-            // Add checkbox persistence
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            
-            // Load saved state
-            checkboxes.forEach(checkbox => {
-                const saved = localStorage.getItem(checkbox.id);
-                if (saved === 'true') {
-                    checkbox.checked = true;
-                }
-            });
-
-            // Save state on change
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    localStorage.setItem(this.id, this.checked);
-                });
-            });
-
-            // Add card hover effects
-            const cards = document.querySelectorAll('.schedule-card, .topic-card, .tip-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px) scale(1.02)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-
-            // Add progress tracking
+            // Add smooth scroll progress
             const progressBar = document.createElement('div');
             progressBar.style.cssText = `
                 position: fixed;
@@ -661,7 +695,57 @@
                 const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
                 progressBar.style.width = scrolled + '%';
             });
+
+            // Add learning path step animations
+            const pathSteps = document.querySelectorAll('.path-step');
+            pathSteps.forEach((step, index) => {
+                step.style.animationDelay = `${index * 0.2}s`;
+                step.style.animation = 'slideInUp 0.6s ease forwards';
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.schedule-card, .rationale-card, .week-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Add time tracking
+            const learningSlots = document.querySelectorAll('.time-slot.learning');
+            learningSlots.forEach(slot => {
+                slot.addEventListener('click', function() {
+                    this.style.background = 'rgba(34, 197, 94, 0.2)';
+                    this.style.borderLeftColor = '#22c55e';
+                    
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        this.style.background = 'rgba(245, 158, 11, 0.1)';
+                        this.style.borderLeftColor = '#f59e0b';
+                    }, 2000);
+                });
+            });
         });
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
